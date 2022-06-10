@@ -1,4 +1,5 @@
 # Best locations in North Carolina to buy real estate
 
 ## Goal:
-- To identify the ideal location in North Carolina to buy a house or townhouse or condo
+- Identify the best locations in North Carolina (NC) to buy a house or townhouse or condo
+- Find the ideal house/condo options in the selected areas
