@@ -1,9 +1,17 @@
 import pandas as pd
 import numpy as np
 
-def filter_variables(df):
+def format_dates(df):
+    #Converting string dates to Pandas datetime format and only keeping month and year
+    df_dates = df.iloc[:,9:]
+    df_dates.columns = pd.Series(df_dates.columns).apply(lambda x: pd.to_datetime(x).to_period('m'))
+    df = df.iloc[:,:9]
+    df = pd.concat([df,df_dates],axis=1)
+    return df
+
+def filter_variables(df,cols=['RegionName','City','State','CountyName','SizeRank',pd.to_datetime('2012-01').to_period('m'),pd.to_datetime('2017-06').to_period('m')]):
     #Filtering the dataset by the variables that are needed
-    df = df[['RegionName','City','State','CountyName','SizeRank','2012-01','2017-06']]
+    df = df[cols]
     return df
     
 def filter_nyc(df):
@@ -16,9 +24,9 @@ def filter_city_state(df,city,state):
     df = df[(df['City']==city) & (df['State']==state)]
     return df
     
-def rename_cols(df):
+def rename_cols(df,cols):
     #Renaming the columns to more readable names
-    df = df.rename(columns={'RegionName':'ZipCode','2012-01':'Price2012','2017-06':'Price2017','CountyName':'County'})
+    df.columns = cols
     return df
     
 def convert_zip_str(df):
