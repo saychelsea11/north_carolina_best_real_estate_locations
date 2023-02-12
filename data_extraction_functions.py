@@ -11,7 +11,7 @@ def retrieve_neighborhood_coordinates(address='Abercromby, Durham, North Carolin
     #address = 'Abercromby, Durham, North Carolina'
 
     geolocator = Nominatim(user_agent="geoapiExercises")
-    location = geolocator.geocode(address)
+    location = geolocator.geocode(address,timeout=10)
     latitude = location.latitude
     longitude = location.longitude
     #print('The geograpical coordinate of ',address,' are {}, {}.'.format(latitude, longitude))
@@ -19,28 +19,32 @@ def retrieve_neighborhood_coordinates(address='Abercromby, Durham, North Carolin
     return longitude, latitude
     
 def extract_durham_neighborhoods(url):
-    response = requests.get(url)
-    bs = BeautifulSoup(response.content,'lxml')
-    #search = bs.find_all('li')
+    try:
+        response = requests.get(url)
+        bs = BeautifulSoup(response.content,'lxml')
+        #search = bs.find_all('li')
 
-    #Extracting data in 'ul' tag which contains neighborhood names
-    ul_list = bs.find_all('ul')
+        #Extracting data in 'ul' tag which contains neighborhood names
+        ul_list = bs.find_all('ul')
 
-    data = []
+        data = []
 
-    for item in ul_list: 
-      if item.get('class'):
-        if "blogroll" in item.get('class'):
-          data = item
-        else: 
-          continue
+        for item in ul_list: 
+          if item.get('class'):
+            if "blogroll" in item.get('class'):
+              data = item
+            else: 
+              continue
 
-    #Extracting individual neighborhoods and storing them in a list
-    li_list = data.find_all('li')
+        #Extracting individual neighborhoods and storing them in a list
+        li_list = data.find_all('li')
 
-    neighborhoods = []
+        neighborhoods = []
 
-    for item in li_list: 
-      neighborhoods.append(item.find('a').text)
+        for item in li_list: 
+          neighborhoods.append(item.find('a').text)
+    except:
+        neighborhoods = []
+        print ("Error while retrieving neighborhoods","\n")
     
     return neighborhoods
