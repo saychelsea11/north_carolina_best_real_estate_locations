@@ -11,9 +11,10 @@ def format_dates(df):
     df = df.iloc[:,:9]
     df = pd.concat([df,df_dates],axis=1)
     return df
-
-def filter_variables(df,cols=['RegionName','City','State','CountyName','SizeRank',pd.to_datetime('2012-01').to_period('m'),pd.to_datetime('2017-06').to_period('m')]):
-    #Filtering the dataset by the variables that are needed
+    
+def filter_data_timespan(df,cols=['RegionName','City','State','CountyName','SizeRank'],
+                        start_date=pd.to_datetime('2012-01').to_period('m'),end_date=pd.to_datetime('2017-06').to_period('m')):
+    cols.extend([start_date,end_date])
     df = df[cols]
     return df
     
@@ -36,3 +37,4 @@ def convert_zip_str(df):
     #Converting the values for the 'ZipCode' variable to string
     df['ZipCode'] = list(map(str,df['ZipCode']))
     return df
+    
