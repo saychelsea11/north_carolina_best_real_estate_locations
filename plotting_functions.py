@@ -3,6 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+def plot_neighborhoods_and_coordinates(df):
+    plt.figure(figsize=(30,12))
+    plt.scatter(df['longitude'],df['latitude'],alpha=0.5)
+    for i in df.index:
+      plt.annotate(df['neighborhood'].iloc[i],xy=(df['longitude'].iloc[i],df['latitude'].iloc[i]),xytext=(df['longitude'].iloc[i],df['latitude'].iloc[i]))
+    plt.xlabel('Longitude',size=15)
+    plt.ylabel('Latitude',size=15)
+    plt.title('Mapping of neighborhood names and coordinates',size=20)
+    plt.show()
+
 def uni_scatterplot(df,y_metric,ylabel):
     #Function used to create a univariate (1 variable) plot for a provided variable in the dataset
     #Inputs: dataframe, column name in dataframe, y-axis label
