@@ -36,30 +36,3 @@ def convert_zip_str(df):
     #Converting the values for the 'ZipCode' variable to string
     df['ZipCode'] = list(map(str,df['ZipCode']))
     return df
-    
-def extract_durham_neighborhoods(url):
-    response = requests.get(url)
-    bs = BeautifulSoup(response.content,'lxml')
-    #search = bs.find_all('li')
-
-    #Extracting data in 'ul' tag which contains neighborhood names
-    ul_list = bs.find_all('ul')
-
-    data = []
-
-    for item in ul_list: 
-      if item.get('class'):
-        if "blogroll" in item.get('class'):
-          data = item
-        else: 
-          continue
-
-    #Extracting individual neighborhoods and storing them in a list
-    li_list = data.find_all('li')
-
-    neighborhoods = []
-
-    for item in li_list: 
-      neighborhoods.append(item.find('a').text)
-    
-    return neighborhoods
