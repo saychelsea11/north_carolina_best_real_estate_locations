@@ -18,3 +18,9 @@ def return_on_investment(df,years):
     #Calculating rate of return by dividing total return over a given period by the initial purchase price
     df['RateOfReturn'] = (df['ReturnOnInvestment']/df['EndPrice'])*100
     return df
+
+def agg_by_city(df,var):
+    print (df[['City',var]].groupby('City').agg(['count','mean','median','std','sum']).round(2)[var].sort_values('mean'))
+
+def agg_by_county(df,var):
+    print (df[['County',var]].groupby('County').agg(['count','mean','median','std','sum']).round(2)[var].sort_values('mean'))
