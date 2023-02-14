@@ -1,11 +1,11 @@
 import pandas as pd
 import numpy as np
 
-def add_price_metrics(df):
+def add_price_metrics(df,years):
     #Creating new variables representing price increases from 2006 and 2012, respectively, to June 2017
     df['PriceIncrease'] = df['EndPrice'] - df['StartPrice']
     df['PriceIncreasePerc'] = ((df['EndPrice'] - df['StartPrice'])/df['StartPrice'])*100
-    df['PriceIncreaseYearly'] = df['PriceIncrease']/5
+    df['PriceIncreaseYearly'] = df['PriceIncrease']/years
     return df
 
 def return_on_investment(df,years):

@@ -28,13 +28,39 @@ def filter_city_state(df,city,state):
     df = df[(df['City']==city) & (df['State']==state)]
     return df
     
-def rename_cols(df,cols):
-    #Renaming the columns to more readable names
-    df.columns = cols
+def filter_cities(df,col_name,cities=['Raleigh','Durham','Chapel Hill','Cary','Morrisville']):
+    #Filtering dataset by cities
+    df = df[df[col_name].isin(cities)]
+    return df
+
+def filter_states(df,col_name,states=['NC']):
+    #Filtering dataset by states
+    df = df[df[col_name].isin(states)]
     return df
     
-def convert_zip_str(df):
-    #Converting the values for the 'ZipCode' variable to string
-    df['ZipCode'] = list(map(str,df['ZipCode']))
+def rename_cols(df,start_date,end_date):
+    #Renaming the columns to more readable names
+    df = df.rename(columns={"RegionName":"ZipCode","CountyName":"County",start_date:"StartPrice",end_date:"EndPrice"})
     return df
+    
+def convert_zip_str(df,col_name):
+    #Converting the values for the 'ZipCode' variable to string
+    df[col_name] = list(map(str,df[col_name]))
+    return df
+    
+def filter_data_pipeline(df,city_col_name,state_col_name,cols=['RegionName','City','State','CountyName','SizeRank'],
+                        start_date='2012-01',end_date='2017-06',
+                        cities=['Raleigh','Durham','Chapel Hill','Cary','Morrisville'],states=['NC']):
+    start_date = pd.to_datetime(start_date).to_period('m')
+    end_date = pd.to_datetime(end_date).to_period('m')
+    df = format_dates(df)
+    df = filter_data_timespan(df,cols,start_date,end_date)
+    df = filter_cities(df,city_col_name,cities)
+    df = filter_states(df,state_col_name,states)
+    df = rename_cols(df,start_date,end_date)
+    
+    return df
+    
+    
+    
     
