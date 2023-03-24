@@ -20,7 +20,7 @@ def return_on_investment(df,years):
     return df
 
 def agg_by_city(df,var):
-    print (df[['City',var]].groupby('City').agg(['count','mean','median','std','sum']).round(2)[var].sort_values('mean'))
+    print (df[['City',var]].groupby('City').agg(['mean','median','std','max','min','sum','count']).round(2)[var].sort_values('mean',ascending=False))
 
 def agg_by_county(df,var):
-    print (df[['County',var]].groupby('County').agg(['count','mean','median','std','sum']).round(2)[var].sort_values('mean'))
+    print (df[['County',var]].groupby('County').agg(['mean','median','std','max','min','sum','count']).round(2)[var].sort_values('mean',ascending=False))
