@@ -15,8 +15,18 @@ def return_on_investment(df,years):
     #Calculating the return on investment using initial purchase price, rental revenue and final housing price
     df['ReturnOnInvestment'] = df['FutureHousingPrice'] - df['EndPrice']
     
+    print (df[['City','ReturnOnInvestment']].groupby('City').agg(['count','mean','median','std','sum'])['ReturnOnInvestment'].sort_values('mean'),'/n')
+    print (df[['County','ReturnOnInvestment']].groupby('County').agg(['count','mean','median','std','sum'])['ReturnOnInvestment'].sort_values('mean'))
+    
+    return df
+    
+def rate_of_return(df,years):
     #Calculating rate of return by dividing total return over a given period by the initial purchase price
     df['RateOfReturn'] = (df['ReturnOnInvestment']/df['EndPrice'])*100
+    
+    print (df[['City','RateOfReturn']].groupby('City').agg(['count','mean','median','std','sum'])['RateOfReturn'].sort_values('mean'),'/n')
+    print (df[['County','RateOfReturn']].groupby('County').agg(['count','mean','median','std','sum'])['RateOfReturn'].sort_values('mean'))
+    
     return df
 
 def agg_by_city(df,var):
