@@ -55,8 +55,14 @@ def filter_data_pipeline(df,city_col_name,state_col_name,cols=['RegionName','Cit
     end_date = pd.to_datetime(end_date).to_period('m')
     df = format_dates(df)
     df = filter_data_timespan(df,cols,start_date,end_date)
-    df = filter_cities(df,city_col_name,cities)
-    df = filter_states(df,state_col_name,states)
+    if len(cities) > 0: 
+        df = filter_cities(df,city_col_name,cities)
+    else: 
+        pass
+    if len(states) > 0:
+        df = filter_states(df,state_col_name,states)
+    else: 
+        pass
     df = rename_cols(df,start_date,end_date)
     
     return df

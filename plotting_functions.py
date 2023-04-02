@@ -54,3 +54,7 @@ def bi_scatterplot(df,x_metric,y_metric,xlabel,ylabel):
     plt.ylabel(ylabel,size=15)
 
     plt.show()
+    
+def uni_barplot(df,col):
+    plt.bar(df[col],col)
+    plt.show()
