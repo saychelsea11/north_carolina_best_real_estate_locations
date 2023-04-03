@@ -47,48 +47,19 @@ df_zillow = add_price_metrics(df_zillow,10)
 
 #Aggregate by city - price
 data = agg_by_city(df_zillow,'EndPrice',metric_choice)
-
-fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
-plt.bar(data[metric_choice].index,data[metric_choice].values,alpha=0.5)
-plt.xticks(size=20)
-plt.yticks(size=20)
-plt.xlabel('City',size=25)
-plt.ylabel('Price($)',size=25)
-st.pyplot(fig3)
+uni_barplot(data,metric_choice,'City','Price($)')
 
 #Aggregate by county - price
 data = agg_by_county(df_zillow,'EndPrice',metric_choice)
-
-fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
-plt.bar(data[metric_choice].index,data[metric_choice].values,alpha=0.5)
-plt.xticks(size=20)
-plt.yticks(size=20)
-plt.xlabel('County',size=25)
-plt.ylabel('Price($)',size=25)
-st.pyplot(fig3)
+uni_barplot(data,metric_choice,'County','Price($)')
 
 #Aggregate by city - price increase percentage
 data = agg_by_city(df_zillow,'PriceIncreasePerc',metric_choice)
-
-fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
-plt.bar(data[metric_choice].index,data[metric_choice].values,alpha=0.5)
-plt.xticks(size=20)
-plt.yticks(size=20)
-plt.xlabel('City',size=25)
-plt.ylabel('Price Increase Perc(%)',size=25)
-st.pyplot(fig3)
+uni_barplot(data,metric_choice,'City','Price Increase (%)')
 
 #Aggregate by county - price increase percentage
 data = agg_by_county(df_zillow,'PriceIncreasePerc',metric_choice)
+uni_barplot(data,metric_choice,'County','Price Increase (%)')
 
-fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
-plt.bar(data[metric_choice].index,data[metric_choice].values,alpha=0.5)
-plt.xticks(size=20)
-plt.yticks(size=20)
-plt.xlabel('City',size=25)
-plt.ylabel('Price Increase Perc(%)',size=25)
-st.pyplot(fig3)
-
-#fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
-#plt.hist(df_zillow['2022-12-31'])
-#st.pyplot(fig3)
+#Comparison by county - price increase percentage
+uni_scatterplot(df_zillow,'PriceIncreasePerc','Housing price increase per year (%)')

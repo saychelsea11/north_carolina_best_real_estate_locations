@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import streamlit as st
 
 def plot_neighborhoods_and_coordinates(df):
     plt.figure(figsize=(30,12))
@@ -16,7 +17,8 @@ def plot_neighborhoods_and_coordinates(df):
 def uni_scatterplot(df,y_metric,ylabel):
     #Function used to create a univariate (1 variable) plot for a provided variable in the dataset
     #Inputs: dataframe, column name in dataframe, y-axis label
-    plt.figure(figsize=(36,10))
+    #fig3 = plt.figure(constrained_layout=True,figsize=(36,10))
+    fig3 = plt.figure(figsize=(36,10))
 
     plt.subplot(1,2,1)
     sns.scatterplot(data=df,x=df.index,y=y_metric,hue='County',s=100)
@@ -32,7 +34,7 @@ def uni_scatterplot(df,y_metric,ylabel):
     plt.xlabel('Index',size=15)
     plt.ylabel(ylabel,size=15)
 
-    plt.show()
+    st.pyplot(fig3)
 
 def bi_scatterplot(df,x_metric,y_metric,xlabel,ylabel):
     #Function used to create a bivariate plot for 2 variables in the dataset
@@ -55,6 +57,12 @@ def bi_scatterplot(df,x_metric,y_metric,xlabel,ylabel):
 
     plt.show()
     
-def uni_barplot(df,col):
-    plt.bar(df[col],col)
-    plt.show()
+def uni_barplot(df,metric_choice,xlabel,ylabel):
+    fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
+    plt.bar(df[metric_choice].index,df[metric_choice].values,alpha=0.5)
+    plt.xticks(size=20,rotation=45)
+    plt.yticks(size=20)
+    plt.xlabel(xlabel,size=25)
+    plt.ylabel(ylabel,size=25)
+    
+    st.pyplot(fig3)
