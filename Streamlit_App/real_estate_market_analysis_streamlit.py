@@ -31,8 +31,13 @@ df_zillow = df_zillow[df_zillow['State']==state_choice]
 #User input for cities
 city_choice = st.multiselect('Select cities', sorted(pd.Series(df_zillow['City'].unique()).dropna()))
 
+#User input for city/county analysis
+#city_county_choice = st.selectbox('Select analysis scope', ['City','County'])
+city_county_choice = st.radio("Select analysis scope", options=["City", "County"])
+
 #User input for aggregate metric
-metric_choice = st.selectbox('Select price analysis metric', ['Mean','Median'])
+#metric_choice = st.selectbox('Select price analysis metric', ['Mean','Median'])
+metric_choice = st.radio("Select analysis scope", options=["Mean", "Median"])
 metric_choice = metric_choice.lower()
 
 #Cleaning and wrangling dataset
@@ -45,21 +50,22 @@ df_zillow = filter_data_pipeline(df_zillow,city_col_name="City",state_col_name="
 #Adding price metrics
 df_zillow = add_price_metrics(df_zillow,10)
 
-#Aggregate by city - price
-data = agg_by_city(df_zillow,'EndPrice',metric_choice)
-uni_barplot(data,metric_choice,'City','Price($)')
+if city_county_choice=="City":
+    #Aggregate by city - price
+    data = agg_by_city(df_zillow,'EndPrice',metric_choice)
+    uni_barplot(data,metric_choice,'City','Price($)')
 
-#Aggregate by county - price
-data = agg_by_county(df_zillow,'EndPrice',metric_choice)
-uni_barplot(data,metric_choice,'County','Price($)')
+    #Aggregate by city - price increase percentage
+    data = agg_by_city(df_zillow,'PriceIncreasePerc',metric_choice)
+    uni_barplot(data,metric_choice,'City','Price Increase (%)')
+else: 
+    #Aggregate by county - price
+    data = agg_by_county(df_zillow,'EndPrice',metric_choice)
+    uni_barplot(data,metric_choice,'County','Price($)')
 
-#Aggregate by city - price increase percentage
-data = agg_by_city(df_zillow,'PriceIncreasePerc',metric_choice)
-uni_barplot(data,metric_choice,'City','Price Increase (%)')
+    #Aggregate by county - price increase percentage
+    data = agg_by_county(df_zillow,'PriceIncreasePerc',metric_choice)
+    uni_barplot(data,metric_choice,'County','Price Increase (%)')
 
-#Aggregate by county - price increase percentage
-data = agg_by_county(df_zillow,'PriceIncreasePerc',metric_choice)
-uni_barplot(data,metric_choice,'County','Price Increase (%)')
-
-#Comparison by county - price increase percentage
-uni_scatterplot(df_zillow,'PriceIncreasePerc','Housing price increase per year (%)')
+#Comparison by zip code - price increase percentage
+uni_scatterplot(df_zillow,'PriceIncreasePerc','Housing price increase per year (%)',city_county_choice)
