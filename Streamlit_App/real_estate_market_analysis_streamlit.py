@@ -8,6 +8,7 @@ warnings.filterwarnings("ignore")
 import requests
 import json
 import streamlit as st
+from datetime import datetime
 
 from bs4 import BeautifulSoup
 import geopy
@@ -31,6 +32,12 @@ df_zillow = df_zillow[df_zillow['State']==state_choice]
 #User input for cities
 city_choice = st.multiselect('Select cities', sorted(pd.Series(df_zillow['City'].unique()).dropna()))
 
+#Creating slider for date range user input
+start_time = st.slider(
+    "Select timeline",
+    value=(datetime(2000, 1, 1, 9, 30),datetime(2022, 12, 1, 9, 30)))
+    #format="MM/DD/YY - hh:mm")
+
 #User input for city/county analysis
 #city_county_choice = st.selectbox('Select analysis scope', ['City','County'])
 city_county_choice = st.radio("Select analysis scope", options=["City", "County"])
@@ -40,8 +47,10 @@ city_county_choice = st.radio("Select analysis scope", options=["City", "County"
 metric_choice = st.radio("Select analysis scope", options=["Mean", "Median"])
 metric_choice = metric_choice.lower()
 
-#Button to start analysis based on the user inputs
+#Creating Streamlit columns to display key metrics
+start_date, end_date = st.columns(2) # create 3 placeholders
 
+#Button to start analysis based on the user inputs
 if st.button('Enter'):
     #Cleaning and wrangling dataset
     df_zillow = filter_data_pipeline(df_zillow,city_col_name="City",state_col_name="State",

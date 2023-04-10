@@ -22,14 +22,19 @@ def uni_scatterplot(df,y_metric,ylabel,city_county_choice):
     xytick_size = 25
     marker_size = 800
     anno_size = 30
-    anno_dist = 1.5
+    anno_dist_factor = 0.005
     
+    #Calculating annotation distance from data range and distance factor
+    y_metric_range = np.max(df[y_metric]) - np.min(df[y_metric])
+    anno_dist = anno_dist_factor * y_metric_range
+    
+    #Plotting section
     fig3 = plt.figure(figsize=(36,30))
     
     if city_county_choice=="City":
         #plt.subplot(2,1,1)
         #plt.subplot(1,2,1)
-        sns.scatterplot(data=df,x=df.index,y=y_metric,hue='City',s=marker_size,alpha=0.7)
+        sns.scatterplot(data=df,x=df.index,y=y_metric,hue='City',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
             plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),
             xytext=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),size=anno_size)
@@ -41,7 +46,7 @@ def uni_scatterplot(df,y_metric,ylabel,city_county_choice):
     else:
         #plt.subplot(2,1,2)
         #plt.subplot(1,2,2)
-        sns.scatterplot(data=df,x=df.index,y=y_metric,hue='County',s=marker_size,alpha=0.7)
+        sns.scatterplot(data=df,x=df.index,y=y_metric,hue='County',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
             plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),
             xytext=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),size=anno_size)
