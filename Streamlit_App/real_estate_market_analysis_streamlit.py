@@ -33,11 +33,11 @@ df_zillow = df_zillow[df_zillow['State']==state_choice]
 city_choice = st.multiselect('Select cities', sorted(pd.Series(df_zillow['City'].unique()).dropna()))
 
 #Creating slider for date range user input
-start_time = st.slider(
+timespan = st.slider(
     "Select timeline",
-    value=(datetime(2000, 1, 1, 9, 30),datetime(2022, 12, 1, 9, 30)))
-    #format="MM/DD/YY - hh:mm")
-
+    value=(datetime(2000, 1, 1, 9, 30),datetime(2022, 12, 1, 9, 30)),
+    format="YYYY-MM")
+    
 #User input for city/county analysis
 #city_county_choice = st.selectbox('Select analysis scope', ['City','County'])
 city_county_choice = st.radio("Select analysis scope", options=["City", "County"])
@@ -55,7 +55,7 @@ if st.button('Enter'):
     #Cleaning and wrangling dataset
     df_zillow = filter_data_pipeline(df_zillow,city_col_name="City",state_col_name="State",
                     cols=['RegionName','City','State','CountyName','SizeRank'],
-                    start_date='2012-01',end_date='2022-12',
+                    start_date=str(pd.to_datetime(timespan[0]).to_period('m')),end_date=str(pd.to_datetime(timespan[1]).to_period('m')),
                     cities=city_choice,
                     states=[])
                     
