@@ -9,7 +9,6 @@ import requests
 import json
 import streamlit as st
 from datetime import datetime
-
 from bs4 import BeautifulSoup
 import geopy
 from geopy.geocoders import Nominatim
@@ -23,6 +22,10 @@ df_zillow = pd.read_csv(path)
 
 st.write("""
 ## U.S. Real Estate Market Analysis
+- Enter the **state** and **cities** within that state
+- Select the historical **timespan** to analyze, based on which future returns will be projected
+- Then enter the number of **years** to project returns for
+- Lastly, select the analysis **scope** and **metric**
 """)
 
 #User input for state
@@ -34,9 +37,12 @@ city_choice = st.multiselect('Select cities', sorted(pd.Series(df_zillow['City']
 
 #Creating slider for date range user input
 timespan = st.slider(
-    "Select timeline",
+    "Select historical analysis timeline",
     value=(datetime(2000, 1, 1, 9, 30),datetime(2022, 12, 1, 9, 30)),
     format="YYYY-MM")
+
+#User input for number of years to project returns for
+future_timespan = st.number_input("Enter number of years to project returns")
     
 #User input for city/county analysis
 #city_county_choice = st.selectbox('Select analysis scope', ['City','County'])
@@ -44,11 +50,8 @@ city_county_choice = st.radio("Select analysis scope", options=["City", "County"
 
 #User input for aggregate metric
 #metric_choice = st.selectbox('Select price analysis metric', ['Mean','Median'])
-metric_choice = st.radio("Select analysis scope", options=["Mean", "Median"])
+metric_choice = st.radio("Select analysis metric", options=["Mean", "Median"])
 metric_choice = metric_choice.lower()
-
-#Creating Streamlit columns to display key metrics
-start_date, end_date = st.columns(2) # create 3 placeholders
 
 #Button to start analysis based on the user inputs
 if st.button('Enter'):
@@ -60,7 +63,7 @@ if st.button('Enter'):
                     states=[])
                     
     #Adding price metrics
-    df_zillow = add_price_metrics(df_zillow,10)
+    df_zillow = add_price_metrics(df_zillow,timespan)
 
     if city_county_choice=="City":
         #Aggregate by city - price
@@ -72,12 +75,12 @@ if st.button('Enter'):
         uni_barplot(data,metric_choice,'City','Price Increase (%)')
         
         #Aggregate by city - return on investment
-        df_zillow = return_on_investment(df_zillow,10)
+        df_zillow = return_on_investment(df_zillow,future_timespan)
         data = agg_by_city(df_zillow,'ReturnOnInvestment',metric_choice)
         uni_barplot(data,metric_choice,'City','Return on Investment ($)')
         
         #Aggregate by city - rate of return
-        df_zillow = rate_of_return(df_zillow,10)
+        df_zillow = rate_of_return(df_zillow,future_timespan)
         data = agg_by_city(df_zillow,'RateOfReturn',metric_choice)
         uni_barplot(data,metric_choice,'City','Rate of Retun (%)')
     else: 
@@ -90,12 +93,12 @@ if st.button('Enter'):
         uni_barplot(data,metric_choice,'County','Price Increase (%)')
         
         #Aggregate by city - return on investment
-        df_zillow = return_on_investment(df_zillow,10)
+        df_zillow = return_on_investment(df_zillow,future_timespan)
         data = agg_by_county(df_zillow,'ReturnOnInvestment',metric_choice)
         uni_barplot(data,metric_choice,'County','Return on Investment ($)')
         
         #Aggregate by city - rate of return
-        df_zillow = rate_of_return(df_zillow,10)
+        df_zillow = rate_of_return(df_zillow,future_timespan)
         data = agg_by_county(df_zillow,'RateOfReturn',metric_choice)
         uni_barplot(data,metric_choice,'County','Rate of Retun (%)')
 

@@ -1,8 +1,11 @@
 import pandas as pd
 import numpy as np
 
-def add_price_metrics(df,years):
-    #Creating new variables representing price increases from 2006 and 2012, respectively, to June 2017
+def add_price_metrics(df,timespan):
+    #Calculating approximate number of years from the timespan entered by the user
+    years = np.round((timespan[1] - timespan[0]).days/365)
+    
+    #Creating new variables representing price increases from the start date to end date entered by the user
     df['PriceIncrease'] = df['EndPrice'] - df['StartPrice']
     df['PriceIncreasePerc'] = ((df['EndPrice'] - df['StartPrice'])/df['StartPrice'])*100
     df['PriceIncreaseYearly'] = df['PriceIncrease']/years
