@@ -66,23 +66,31 @@ if st.button('Enter'):
     df_zillow = add_price_metrics(df_zillow,timespan)
 
     if city_county_choice=="City":
+        fig3 = plt.figure(constrained_layout=True,figsize=(21,15))
+        
+        plt.subplot(2,2,1)
         #Aggregate by city - price
         data = agg_by_city(df_zillow,'EndPrice',metric_choice)
         uni_barplot(data,metric_choice,'City','Price($)')
-
+        
+        plt.subplot(2,2,2)
         #Aggregate by city - price increase percentage
         data = agg_by_city(df_zillow,'PriceIncreasePerc',metric_choice)
         uni_barplot(data,metric_choice,'City','Price Increase (%)')
         
+        plt.subplot(2,2,3)
         #Aggregate by city - return on investment
         df_zillow = return_on_investment(df_zillow,future_timespan)
         data = agg_by_city(df_zillow,'ReturnOnInvestment',metric_choice)
         uni_barplot(data,metric_choice,'City','Return on Investment ($)')
         
+        plt.subplot(2,2,4)
         #Aggregate by city - rate of return
         df_zillow = rate_of_return(df_zillow,future_timespan)
         data = agg_by_city(df_zillow,'RateOfReturn',metric_choice)
         uni_barplot(data,metric_choice,'City','Rate of Retun (%)')
+        
+        st.pyplot(fig3)
     else: 
         #Aggregate by county - price
         data = agg_by_county(df_zillow,'EndPrice',metric_choice)
