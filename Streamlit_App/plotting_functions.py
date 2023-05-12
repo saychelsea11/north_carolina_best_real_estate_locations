@@ -36,7 +36,7 @@ def uni_scatterplot(df,y_metric,title,ylabel,city_county_choice):
         sns.scatterplot(data=df,x=df.index,y=y_metric,hue='City',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
             plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),
-            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size)
+            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size,color='black',alpha=0.5)
         plt.title(title,size=title_size)
         plt.xlabel('Zip code',size=xylabel_size)
         plt.ylabel(ylabel,size=xylabel_size)
