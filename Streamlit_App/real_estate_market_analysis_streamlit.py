@@ -43,6 +43,7 @@ timespan = st.slider(
 
 #User input for number of years to project returns for
 future_timespan = st.number_input("Enter number of years to project returns")
+future_timespan = int(future_timespan)
     
 #User input for city/county analysis
 #city_county_choice = st.selectbox('Select analysis scope', ['City','County'])
@@ -109,15 +110,22 @@ if st.button('Enter'):
         df_zillow = rate_of_return(df_zillow,future_timespan)
         data = agg_by_county(df_zillow,'RateOfReturn',metric_choice)
         uni_barplot(data,metric_choice,'County','Rate of Retun (%)')
+    
+    #Comparison by zip code - price increase percentage
+    uni_scatterplot(df_zillow,'EndPrice','Avg Housing Price Across Zipcodes on ' + str(timespan[1].date()),
+                    'Avg Housing price ($)',city_county_choice)
+    
+    #Comparison by zip code - price increase percentage
+    uni_scatterplot(df_zillow,'PriceIncreasePerc','Avg Yearly Housing Price Increase Percent Across Zipcodes on ' + str(timespan[1].date()),
+                    'Housing price increase per year (%)',city_county_choice)
 
     #Comparison by zip code - price increase percentage
-    uni_scatterplot(df_zillow,'PriceIncreasePerc','Housing price increase per year (%)',city_county_choice)
+    uni_scatterplot(df_zillow,'ReturnOnInvestment','Avg Return On Investment Across Zipcodes after ' + str(future_timespan) + 'Years',
+                    'Total return on investment ($)',city_county_choice)
 
     #Comparison by zip code - price increase percentage
-    uni_scatterplot(df_zillow,'ReturnOnInvestment','Total return on investment ($)',city_county_choice)
-
-    #Comparison by zip code - price increase percentage
-    uni_scatterplot(df_zillow,'RateOfReturn','Total rate of return (%)',city_county_choice)
+    uni_scatterplot(df_zillow,'RateOfReturn','Avg Rate of Return Across Zipcodes after ' + str(future_timespan) + 'Years',
+                    'Total rate of return (%)',city_county_choice)
 else: 
     pass
 

@@ -14,11 +14,12 @@ def plot_neighborhoods_and_coordinates(df):
     plt.title('Mapping of neighborhood names and coordinates',size=20)
     plt.show()
 
-def uni_scatterplot(df,y_metric,ylabel,city_county_choice):
+def uni_scatterplot(df,y_metric,title,ylabel,city_county_choice):
     #Function used to create a univariate (1 variable) plot for a provided variable in the dataset
     #Inputs: dataframe, column name in dataframe, y-axis label
     #fig3 = plt.figure(constrained_layout=True,figsize=(36,10))
-    xylabel_size = 40
+    title_size = 50
+    xylabel_size = 45
     xytick_size = 25
     marker_size = 800
     anno_size = 30
@@ -32,24 +33,22 @@ def uni_scatterplot(df,y_metric,ylabel,city_county_choice):
     fig3 = plt.figure(figsize=(36,30))
     
     if city_county_choice=="City":
-        #plt.subplot(2,1,1)
-        #plt.subplot(1,2,1)
         sns.scatterplot(data=df,x=df.index,y=y_metric,hue='City',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
-            plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),
-            xytext=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),size=anno_size)
+            plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),
+            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size)
+        plt.title(title,size=title_size)
         plt.xlabel('Zip code',size=xylabel_size)
         plt.ylabel(ylabel,size=xylabel_size)
         plt.xticks(size=xytick_size)
         plt.yticks(size=xytick_size)
         plt.legend(fontsize="30",markerscale=5)
     else:
-        #plt.subplot(2,1,2)
-        #plt.subplot(1,2,2)
         sns.scatterplot(data=df,x=df.index,y=y_metric,hue='County',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
-            plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),
-            xytext=(df.index[i]+anno_dist,df[y_metric].iloc[i]+anno_dist),size=anno_size)
+            plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),
+            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size)
+        plt.title(title,size=title_size)
         plt.xlabel('Zip code',size=xylabel_size)
         plt.ylabel(ylabel,size=xylabel_size)
         plt.xticks(size=xytick_size)
