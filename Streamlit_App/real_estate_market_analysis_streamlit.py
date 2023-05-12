@@ -72,60 +72,60 @@ if st.button('Enter'):
         plt.subplot(2,2,1)
         #Aggregate by city - price
         data = agg_by_city(df_zillow,'EndPrice',metric_choice)
-        uni_barplot(data,metric_choice,'City','Price($)')
+        uni_barplot(data,metric_choice,'City','Avg price($)','Avg Housing Price on ' + str(timespan[1].date()))
         
         plt.subplot(2,2,2)
         #Aggregate by city - price increase percentage
         data = agg_by_city(df_zillow,'PriceIncreasePerc',metric_choice)
-        uni_barplot(data,metric_choice,'City','Price Increase (%)')
+        uni_barplot(data,metric_choice,'City','Avg price increase(%)','Avg Yearly Housing Price Increase % on ' + str(timespan[1].date()))
         
         plt.subplot(2,2,3)
         #Aggregate by city - return on investment
         df_zillow = return_on_investment(df_zillow,future_timespan)
         data = agg_by_city(df_zillow,'ReturnOnInvestment',metric_choice)
-        uni_barplot(data,metric_choice,'City','Return on Investment ($)')
+        uni_barplot(data,metric_choice,'City','Avg ROI($)','Avg Return On Investment after ' + str(future_timespan) + ' Years')
         
         plt.subplot(2,2,4)
         #Aggregate by city - rate of return
         df_zillow = rate_of_return(df_zillow,future_timespan)
         data = agg_by_city(df_zillow,'RateOfReturn',metric_choice)
-        uni_barplot(data,metric_choice,'City','Rate of Retun (%)')
+        uni_barplot(data,metric_choice,'City','Avg ROR(%)','Avg Rate of Return after ' + str(future_timespan) + ' Years')
         
         st.pyplot(fig3)
     else: 
         #Aggregate by county - price
         data = agg_by_county(df_zillow,'EndPrice',metric_choice)
-        uni_barplot(data,metric_choice,'County','Price($)')
+        uni_barplot(data,metric_choice,'County','Avg price($)','Avg Housing Price on ' + str(timespan[1].date()))
 
         #Aggregate by county - price increase percentage
         data = agg_by_county(df_zillow,'PriceIncreasePerc',metric_choice)
-        uni_barplot(data,metric_choice,'County','Price Increase (%)')
+        uni_barplot(data,metric_choice,'County','Avg price increase(%)','Avg Yearly Housing Price Increase % on ' + str(timespan[1].date()))
         
         #Aggregate by city - return on investment
         df_zillow = return_on_investment(df_zillow,future_timespan)
         data = agg_by_county(df_zillow,'ReturnOnInvestment',metric_choice)
-        uni_barplot(data,metric_choice,'County','Return on Investment ($)')
+        uni_barplot(data,metric_choice,'County','Avg ROI($)','Avg Return On Investment after ' + str(future_timespan) + ' Years')
         
         #Aggregate by city - rate of return
         df_zillow = rate_of_return(df_zillow,future_timespan)
         data = agg_by_county(df_zillow,'RateOfReturn',metric_choice)
-        uni_barplot(data,metric_choice,'County','Rate of Retun (%)')
+        uni_barplot(data,metric_choice,'County','Avg ROR(%)','Avg Rate of Return after ' + str(future_timespan) + ' Years')
     
     #Comparison by zip code - price increase percentage
     uni_scatterplot(df_zillow,'EndPrice','Avg Housing Price Across Zipcodes on ' + str(timespan[1].date()),
-                    'Avg Housing price ($)',city_county_choice)
+                    'Avg housing price ($)',city_county_choice)
     
     #Comparison by zip code - price increase percentage
     uni_scatterplot(df_zillow,'PriceIncreasePerc','Avg Yearly Housing Price Increase Percent Across Zipcodes on ' + str(timespan[1].date()),
-                    'Housing price increase per year (%)',city_county_choice)
+                    'Avg housing price increase per year (%)',city_county_choice)
 
     #Comparison by zip code - price increase percentage
-    uni_scatterplot(df_zillow,'ReturnOnInvestment','Avg Return On Investment Across Zipcodes after ' + str(future_timespan) + 'Years',
-                    'Total return on investment ($)',city_county_choice)
+    uni_scatterplot(df_zillow,'ReturnOnInvestment','Avg Return On Investment Across Zipcodes after ' + str(future_timespan) + ' Years',
+                    'Avg return on investment ($)',city_county_choice)
 
     #Comparison by zip code - price increase percentage
-    uni_scatterplot(df_zillow,'RateOfReturn','Avg Rate of Return Across Zipcodes after ' + str(future_timespan) + 'Years',
-                    'Total rate of return (%)',city_county_choice)
+    uni_scatterplot(df_zillow,'RateOfReturn','Avg Rate of Return Across Zipcodes after ' + str(future_timespan) + ' Years',
+                    'Avg rate of return (%)',city_county_choice)
 else: 
     pass
 

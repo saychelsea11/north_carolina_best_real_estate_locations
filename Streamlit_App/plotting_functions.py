@@ -20,7 +20,7 @@ def uni_scatterplot(df,y_metric,title,ylabel,city_county_choice):
     #fig3 = plt.figure(constrained_layout=True,figsize=(36,10))
     title_size = 50
     xylabel_size = 45
-    xytick_size = 25
+    xytick_size = 30
     marker_size = 800
     anno_size = 30
     anno_dist_factor = 0.005
@@ -36,7 +36,7 @@ def uni_scatterplot(df,y_metric,title,ylabel,city_county_choice):
         sns.scatterplot(data=df,x=df.index,y=y_metric,hue='City',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
             plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),
-            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size,color='black',alpha=0.5)
+            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size,alpha=0.6)
         plt.title(title,size=title_size)
         plt.xlabel('Zip code',size=xylabel_size)
         plt.ylabel(ylabel,size=xylabel_size)
@@ -47,7 +47,7 @@ def uni_scatterplot(df,y_metric,title,ylabel,city_county_choice):
         sns.scatterplot(data=df,x=df.index,y=y_metric,hue='County',s=marker_size,alpha=1)
         for i in range(len(df['ZipCode'])):
             plt.annotate(str(df['ZipCode'].iloc[i]),xy=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),
-            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size)
+            xytext=(df.index[i]+100,df[y_metric].iloc[i]+anno_dist),size=anno_size,alpha=0.6)
         plt.title(title,size=title_size)
         plt.xlabel('Zip code',size=xylabel_size)
         plt.ylabel(ylabel,size=xylabel_size)
@@ -78,9 +78,10 @@ def bi_scatterplot(df,x_metric,y_metric,xlabel,ylabel):
 
     plt.show()
     
-def uni_barplot(df,metric_choice,xlabel,ylabel):
+def uni_barplot(df,metric_choice,xlabel,ylabel,title):
     #fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
     plt.bar(df[metric_choice].index,df[metric_choice].values,alpha=0.5)
+    plt.title(title,size=25)
     plt.xticks(size=20,rotation=45)
     plt.yticks(size=20)
     plt.xlabel(xlabel,size=25)
