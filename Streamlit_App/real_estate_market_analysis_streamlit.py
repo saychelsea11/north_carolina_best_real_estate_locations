@@ -31,6 +31,11 @@ st.write("""
 #User input for state
 state_choice = st.selectbox('Select state', sorted(pd.Series(df_zillow['State'].unique()).dropna()))
 df_zillow = df_zillow[df_zillow['State']==state_choice]
+df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','State','Metro','CountyName','SizeRank'],axis=1)
+df_zillow_timeseries_mean = df_zillow_timeseries.mean()
+df_zillow_timeseries_median = df_zillow_timeseries.median()
+df_zillow_timeseries_mean.index = pd.to_datetime(df_zillow_timeseries_mean.index)
+df_zillow_timeseries_median.index = pd.to_datetime(df_zillow_timeseries_median.index)
 
 #User input for cities
 city_choice = st.multiselect('Select cities', sorted(pd.Series(df_zillow['City'].unique()).dropna()))
@@ -66,8 +71,20 @@ if st.button('Enter'):
     #Adding price metrics
     years = np.round((timespan[1] - timespan[0]).days/365)
     df_zillow = add_price_metrics(df_zillow,timespan)
-
-    st.write(f'### Analyzing average housing price trends across cities in {state_choice}')
+    
+    #Plotting historical average housing prices
+    st.write("")
+    st.write("")
+    st.write(f'### Historical Housing Price Trend in {state_choice}')
+    
+    fig3 = plt.figure(figsize=(36,25))
+    uni_lineplot(df_zillow_timeseries_mean,'Timeline','Avg Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Mean')
+    uni_lineplot(df_zillow_timeseries_median,'Timeline','Avg Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Median')
+    st.pyplot(fig3)
+    
+    st.write("")
+    st.write("")
+    st.write(f'### Analyzing Average Housing Price Trends Across Cities in {state_choice}')
 
     if city_county_choice=="City":
         fig3 = plt.figure(constrained_layout=True,figsize=(21,15))
@@ -119,6 +136,8 @@ if st.button('Enter'):
         uni_barplot(data,metric_choice,'County','Avg ROR(%)','Avg Rate of Return after ' + str(future_timespan) + ' Years')
     
     #Comparison by zip code - price increase percentage
+    st.write("")
+    st.write("")
     st.write(f'### Analyzing historical housing price trends across zipcodes and cities in {state_choice}')
     uni_scatterplot(df_zillow,'EndPrice','Avg Housing Price Across Zipcodes on ' + str(timespan[1].date()),
                     'Avg housing price ($)',city_county_choice)
@@ -127,6 +146,8 @@ if st.button('Enter'):
     uni_scatterplot(df_zillow,'PriceIncreasePerc','Avg Housing Price Increase Percent Across Zipcodes on ' + str(timespan[1].date()),
                     'Avg housing price increase(%)',city_county_choice)
     
+    st.write("")
+    st.write("")
     st.write(f'### Forecasting returns on housing investments across zipcodes and cities in {state_choice}')
     #Comparison by zip code - price increase percentage
     uni_scatterplot(df_zillow,'ReturnOnInvestment','Avg Return On Investment Across Zipcodes after ' + str(future_timespan) + ' Years',

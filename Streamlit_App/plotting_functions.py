@@ -79,7 +79,6 @@ def bi_scatterplot(df,x_metric,y_metric,xlabel,ylabel):
     plt.show()
     
 def uni_barplot(df,metric_choice,xlabel,ylabel,title,plot_label=''):
-    #fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
     plt.bar(df[metric_choice].index,df[metric_choice].values,alpha=0.5,label=plot_label)
     plt.title(title,size=25)
     plt.xticks(size=20,rotation=45)
@@ -89,7 +88,6 @@ def uni_barplot(df,metric_choice,xlabel,ylabel,title,plot_label=''):
     plt.legend(fontsize="15",markerscale=1)
     
 def bi_barplot(df1,df2,metric_choice,xlabel,ylabel,title,plot_label=[]):
-    #fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
     plt.bar(df1[metric_choice].index,df1[metric_choice].values,alpha=0.5,label=plot_label[0])
     plt.bar(df2[metric_choice].index,df2[metric_choice].values,alpha=0.5,label=plot_label[1])
     plt.title(title,size=25)
@@ -100,7 +98,6 @@ def bi_barplot(df1,df2,metric_choice,xlabel,ylabel,title,plot_label=[]):
     plt.legend(fontsize="15",markerscale=1)
     
 def adj_barplot(df1,df2,metric,xlabel,ylabel,title,plot_labels=[]):
-    #fig3 = plt.figure(constrained_layout=True,figsize=(21,11))
     x = np.arange(df1.shape[0])
     plt.bar(x + 0.2, df1[metric].values, alpha=0.5, label=plot_labels[0], width=0.4)
     plt.bar(x - 0.2, df2[metric].values, alpha=0.5, label=plot_labels[1], width=0.4)
@@ -110,4 +107,13 @@ def adj_barplot(df1,df2,metric,xlabel,ylabel,title,plot_labels=[]):
     plt.xlabel(xlabel,size=25)
     plt.ylabel(ylabel,size=25)
     plt.legend(fontsize="15",markerscale=1)
+    
+def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
+    plt.plot(df,label=chart_label)
+    plt.title(title,size=50)
+    plt.xticks(size=30)
+    plt.yticks(size=30)
+    plt.xlabel(xlabel,size=45)
+    plt.ylabel(ylabel,size=45)
+    plt.legend(fontsize="40",markerscale=10)
     
