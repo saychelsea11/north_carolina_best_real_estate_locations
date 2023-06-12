@@ -40,12 +40,17 @@ def filter_states(df,col_name,states=['NC']):
     
 def rename_cols(df,start_date,end_date):
     #Renaming the columns to more readable names
-    df = df.rename(columns={"RegionName":"ZipCode","CountyName":"County",start_date:"StartPrice",end_date:"EndPrice"})
+    df = df.rename(columns={"RegionName":"ZipCode","CountyName":"County",start_date:"StartPrice($)",end_date:"EndPrice($)"})
     return df
     
 def convert_zip_str(df,col_name):
     #Converting the values for the 'ZipCode' variable to string
     df[col_name] = list(map(str,df[col_name]))
+    return df
+    
+def set_index_to_col(df,col_name):
+    df.index = df[col_name]
+    df = df.drop(col_name,axis=1)
     return df
     
 def filter_data_pipeline(df,city_col_name,state_col_name,cols=['RegionName','City','State','CountyName','SizeRank'],
@@ -66,6 +71,14 @@ def filter_data_pipeline(df,city_col_name,state_col_name,cols=['RegionName','Cit
     df = rename_cols(df,start_date,end_date)
     
     return df
+    
+def sort_data_by_count(df,col_name):
+    df = df[['ZipCode','City','State','County',col_name]]
+    df = df.sort_values(col_name,ascending=False)
+    df[col_name] = df[col_name].apply(lambda x: np.round(x,2))
+    df = df.reset_index()
+    return df
+    
     
     
     
