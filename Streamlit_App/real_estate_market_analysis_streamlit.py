@@ -32,6 +32,7 @@ print (state_choice)
 df_zillow = df_zillow[df_zillow['State']==state_choice]
 print (df_zillow)
 df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','State','Metro','CountyName','SizeRank'],axis=1)
+print (df_zillow_timeseries)
 df_zillow_timeseries_mean = df_zillow_timeseries.mean()
 df_zillow_timeseries_median = df_zillow_timeseries.median()
 df_zillow_timeseries_mean.index = pd.to_datetime(df_zillow_timeseries_mean.index)
