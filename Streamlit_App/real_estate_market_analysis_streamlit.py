@@ -10,6 +10,8 @@ from wrangling_functions import *
 from plotting_functions import *
 from data_extraction_functions import *
 
+print (os.getcwd())
+
 path = r'Zip_zhvi_bdrmcnt_2_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv'
 df_zillow = pd.read_csv(path)
 
