@@ -2,17 +2,9 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-import warnings
-warnings.filterwarnings("ignore")
-import requests
-import json
 import calendar
 import streamlit as st
 from datetime import datetime
-from bs4 import BeautifulSoup
-import geopy
-from geopy.geocoders import Nominatim
 from math_functions import *
 from wrangling_functions import *
 from plotting_functions import *
