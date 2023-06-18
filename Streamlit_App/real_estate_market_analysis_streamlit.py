@@ -10,7 +10,7 @@ from wrangling_functions import *
 from plotting_functions import *
 from data_extraction_functions import *
 
-path = r'C:\Users\sdas\Github_DS\north_carolina_best_real_estate_locations\Datasets\Zip_zhvi_bdrmcnt_2_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv'
+path = r'north_carolina_best_real_estate_locations\Datasets\Zip_zhvi_bdrmcnt_2_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv'
 df_zillow = pd.read_csv(path)
 
 st.write("""
