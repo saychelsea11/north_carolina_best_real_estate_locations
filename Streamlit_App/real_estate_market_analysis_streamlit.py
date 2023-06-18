@@ -10,12 +10,6 @@ from wrangling_functions import *
 from plotting_functions import *
 from data_extraction_functions import *
 
-print ()
-print ("Working directory:", os.getcwd())
-print ()
-
-st.write(os.getcwd())
-
 path = r'Streamlit_App/Zip_zhvi_bdrmcnt_2_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv'
 df_zillow = pd.read_csv(path)
 
@@ -34,7 +28,9 @@ st.write("""
 
 #User input for state
 state_choice = st.selectbox('Select state', sorted(pd.Series(df_zillow['State'].unique()).dropna()))
+print (state_choice)
 df_zillow = df_zillow[df_zillow['State']==state_choice]
+print (df_zillow)
 df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','State','Metro','CountyName','SizeRank'],axis=1)
 df_zillow_timeseries_mean = df_zillow_timeseries.mean()
 df_zillow_timeseries_median = df_zillow_timeseries.median()
