@@ -35,6 +35,11 @@ def rate_of_return(df,years):
 def agg_by_city(df,var,sort_by_val):
     data = df[['City',var]].groupby('City').agg(['count','mean','median','std','max','min','sum']).round(2)[var].sort_values(sort_by_val,ascending=False)
     data_state = df[['State',var]].groupby('State').agg(['count','mean','median','std','max','min','sum']).round(2)[var].sort_values(sort_by_val,ascending=False)
+    print ()
+    print (data)
+    print ()
+    print (data_state)
+    print ()
     data = data.append(data_state)
     
     print (data)
