@@ -146,7 +146,7 @@ if st.button('Enter'):
     uni_scatterplot(df_zillow,'EndPrice($)',f'{metric_choice.capitalize()} Housing Price Across Cites/Zipcodes on {calendar.month_abbr[timespan[1].month]} {timespan[1].year}',
                     'Housing price ($)',city_county_choice)
     st.write("")
-    df_zillow_sorted = sort_data_by_count(df_zillow,"EndPrice($)")
+    df_zillow_sorted = sort_data_by_count(df_zillow,"EndPrice($)").drop('index',axis=1)
     st.dataframe(df_zillow_sorted)
     
     st.write("")
@@ -154,7 +154,7 @@ if st.button('Enter'):
     uni_scatterplot(df_zillow,'PriceIncreasePerc(%)',f'{metric_choice.capitalize()} Housing Price Increase % Across Cities/Zipcodes from {calendar.month_abbr[timespan[0].month]} {timespan[0].year} to {calendar.month_abbr[timespan[1].month]} {timespan[1].year}',
                     'Housing price increase(%)',city_county_choice)
     st.write("")
-    df_zillow_sorted = sort_data_by_count(df_zillow,"PriceIncreasePerc(%)")
+    df_zillow_sorted = sort_data_by_count(df_zillow,"PriceIncreasePerc(%)").drop('index',axis=1)
     st.dataframe(df_zillow_sorted)
     
     st.write("")
@@ -165,7 +165,7 @@ if st.button('Enter'):
     uni_scatterplot(df_zillow,'ReturnOnInvestment($)',f'{metric_choice.capitalize()} Return On Investment Across Cities/Zipcodes after ' + str(future_timespan) + ' Years',
                     'Return on investment ($)',city_county_choice)
     st.write("")
-    df_zillow_sorted = sort_data_by_count(df_zillow,"ReturnOnInvestment($)")
+    df_zillow_sorted = sort_data_by_count(df_zillow,"ReturnOnInvestment($)").drop('index',axis=1)
     st.dataframe(df_zillow_sorted)
     
     st.write("")
@@ -173,7 +173,7 @@ if st.button('Enter'):
     uni_scatterplot(df_zillow,'RateOfReturn(%)',f'{metric_choice.capitalize()} Rate of Return Across Cities/Zipcodes after ' + str(future_timespan) + ' Years',
                     'Rate of return (%)',city_county_choice)
     st.write("")
-    df_zillow_sorted = sort_data_by_count(df_zillow,"RateOfReturn(%)")
+    df_zillow_sorted = sort_data_by_count(df_zillow,"RateOfReturn(%)").drop('index',axis=1)
     st.dataframe(df_zillow_sorted)
     
     st.write("Numpy:",np.__version__)
