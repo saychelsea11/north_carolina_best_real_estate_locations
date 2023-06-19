@@ -175,6 +175,11 @@ if st.button('Enter'):
     st.write("")
     df_zillow_sorted = sort_data_by_count(df_zillow,"RateOfReturn(%)")
     st.dataframe(df_zillow_sorted)
+    
+    st.write("Numpy:",np.__version__)
+    st.write("Pandas:",pd.__version__)
+    st.write("Matplotlib:",plt.__version__)
+    st.write("Streamlit:",st.__version__)
 else: 
     pass
 
