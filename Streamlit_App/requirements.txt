@@ -55,4 +55,3 @@ validators==0.20.0
 watchdog==2.2.1
 webencodings==0.5.1
 wincertstore==0.2
-yfinance==0.2.9
