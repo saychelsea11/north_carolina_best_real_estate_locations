@@ -77,6 +77,7 @@ def sort_data_by_count(df,col_name):
     df = df.sort_values(col_name,ascending=False)
     df[col_name] = df[col_name].apply(lambda x: np.round(x,2))
     df = df.reset_index(drop=True)
+    df.index = df.index + 1
     return df
     
     
