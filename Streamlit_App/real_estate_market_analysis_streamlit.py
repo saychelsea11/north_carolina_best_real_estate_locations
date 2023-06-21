@@ -31,12 +31,10 @@ state_choice = st.selectbox('Select state', sorted(pd.Series(df_zillow['State'].
 df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','Metro','CountyName','SizeRank'],axis=1)
 df_zillow = df_zillow[df_zillow['State']==state_choice]
 #df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','State','Metro','CountyName','SizeRank'],axis=1)
-df_zillow_timeseries_mean = df_zillow_timeseries.mean(numeric_only=True)
-df_zillow_timeseries_median = df_zillow_timeseries.median(numeric_only=True)
-df_zillow_timeseries_mean.index = pd.to_datetime(df_zillow_timeseries_mean.index)
-df_zillow_timeseries_median.index = pd.to_datetime(df_zillow_timeseries_median.index)
-st.write(df_zillow_timeseries_mean)
-print (df_zillow_timeseries_mean)
+#df_zillow_timeseries_mean = df_zillow_timeseries.mean(numeric_only=True)
+#df_zillow_timeseries_median = df_zillow_timeseries.median(numeric_only=True)
+#df_zillow_timeseries_mean.index = pd.to_datetime(df_zillow_timeseries_mean.index)
+#df_zillow_timeseries_median.index = pd.to_datetime(df_zillow_timeseries_median.index)
 
 #User input for cities
 city_choice = st.multiselect('Select cities', sorted(pd.Series(df_zillow['City'].unique()).dropna()))
@@ -79,7 +77,7 @@ if st.button('Enter'):
     st.write(f'### Historical Housing Price Trend in {state_choice}')
     st.write("")
 
-    historical_timeseries_grid(df_zillow_timeseries_mean,df_zillow_timeseries_median)
+    historical_timeseries_grid(df_zillow_timeseries)
     #fig3 = plt.figure(figsize=(36,25))
     #uni_lineplot(df_zillow_timeseries_mean,'Timeline','Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Mean')
     #uni_lineplot(df_zillow_timeseries_median,'Timeline','Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Median')
