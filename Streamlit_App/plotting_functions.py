@@ -126,6 +126,7 @@ def historical_timeseries_grid(df,state_choice):
         pass
     else: 
         states.pop(6)
+        states.append(state_choice)
     
     for chart in range(1,10):
         df_state = df.copy()
