@@ -133,6 +133,7 @@ def historical_timeseries_grid(df):
         plt.subplot(3,3,chart)
         plt.plot(df_timeseries_mean,label='Mean',linewidth = '8',alpha=0.5)
         plt.plot(df_timeseries_median,label='Median',linewidth = '8',alpha=0.5)
+        plt.title(states[chart-1],size=45)
         plt.xticks(size=25)
         plt.yticks(size=25)
         plt.xlabel('Timeline',size=35)
