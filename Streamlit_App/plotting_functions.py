@@ -118,6 +118,8 @@ def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
     plt.legend(fontsize="40",markerscale=10)
 
 def historical_timeseries_grid(df):    
+    fig3 = plt.figure(figsize=(36,25))
+    
     states = ['CA','TX','FL','NY','PA','IL','OH','GA','NC']
     
     for chart in range(1,10):
@@ -137,4 +139,6 @@ def historical_timeseries_grid(df):
         plt.xlabel('Timeline',size=45)
         plt.ylabel('Housing Price($)',size=45)
         plt.legend(fontsize="40",markerscale=10)
+
+    st.pyplot(fig3)
     
