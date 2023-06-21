@@ -78,7 +78,7 @@ if st.button('Enter'):
     st.write("")
 
     historical_timeseries_grid(df_zillow_timeseries)
-    #fig3 = plt.figure(figsize=(36,25))
+    fig3 = plt.figure(figsize=(36,25))
     #uni_lineplot(df_zillow_timeseries_mean,'Timeline','Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Mean')
     #uni_lineplot(df_zillow_timeseries_median,'Timeline','Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Median')
     st.pyplot(fig3)
