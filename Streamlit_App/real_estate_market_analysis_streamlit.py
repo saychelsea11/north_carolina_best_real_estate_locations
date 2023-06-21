@@ -28,7 +28,7 @@ st.write("""
 
 #User input for state
 state_choice = st.selectbox('Select state', sorted(pd.Series(df_zillow['State'].unique()).dropna()))
-df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','State','Metro','CountyName','SizeRank'],axis=1)
+df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','Metro','CountyName','SizeRank'],axis=1)
 df_zillow = df_zillow[df_zillow['State']==state_choice]
 #df_zillow_timeseries = df_zillow.drop(['RegionID','RegionName','City','State','Metro','CountyName','SizeRank'],axis=1)
 df_zillow_timeseries_mean = df_zillow_timeseries.mean(numeric_only=True)
