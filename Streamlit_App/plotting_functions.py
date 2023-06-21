@@ -124,9 +124,9 @@ def historical_timeseries_grid(df_mean,df_median):
     
     for chart in range(1,10):
         df_state_mean = df_mean.copy()
-        df_state_mean = df_state_mean[df['State']==states[chart-1]]
+        df_state_mean = df_state_mean[df_state_mean['State']==states[chart-1]]
         df_state_median = df_median.copy()
-        df_state_median = df_state_median[df['State']==states[chart-1]]
+        df_state_median = df_state_median[df_state_median['State']==states[chart-1]]
         plt.subplot(3,3,chart)
         plt.plot(df_state,label='Mean',linewidth = '10',alpha=0.7)
         plt.plot(df_state,label='Median',linewidth = '10',alpha=0.7)
