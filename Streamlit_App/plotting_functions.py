@@ -118,7 +118,7 @@ def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
     plt.legend(fontsize="40",markerscale=10)
 
 def historical_timeseries_grid(df):    
-    fig3 = plt.figure(figsize=(45,30))
+    fig3 = plt.figure(constrained_layout=True,figsize=(45,30))
     
     states = ['CA','TX','FL','NY','PA','IL','OH','GA','NC']
     
