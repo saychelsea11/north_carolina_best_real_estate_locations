@@ -77,7 +77,7 @@ if st.button('Enter'):
     st.write(f'### Historical Housing Price Trends Across Most Populated U.S. States')
     st.write("")
 
-    historical_timeseries_grid(df_zillow_timeseries)
+    historical_timeseries_grid(df_zillow_timeseries,state_choice)
     #uni_lineplot(df_zillow_timeseries_mean,'Timeline','Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Mean')
     #uni_lineplot(df_zillow_timeseries_median,'Timeline','Housing Price($)',f'Mean and Median Historical Housing Price in {state_choice}','Median')
     
