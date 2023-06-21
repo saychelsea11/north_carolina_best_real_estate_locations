@@ -74,7 +74,7 @@ if st.button('Enter'):
     #Plotting historical average housing prices
     st.write("")
     st.write("")
-    st.write(f'### Historical Housing Price Trend in {state_choice}')
+    st.write(f'### Historical Housing Price Trends Across Most Populated U.S. States')
     st.write("")
 
     historical_timeseries_grid(df_zillow_timeseries)
