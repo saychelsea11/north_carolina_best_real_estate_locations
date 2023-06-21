@@ -109,7 +109,7 @@ def adj_barplot(df1,df2,metric,xlabel,ylabel,title,plot_labels=[]):
     plt.legend(fontsize="15",markerscale=1)
     
 def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
-    plt.plot(df,label=chart_label)
+    plt.plot(df,label=chart_label,linewidth = '10')
     plt.title(title,size=50)
     plt.xticks(size=30)
     plt.yticks(size=30)
