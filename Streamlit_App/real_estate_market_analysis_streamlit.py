@@ -35,6 +35,7 @@ df_zillow_timeseries_mean = df_zillow_timeseries.mean(numeric_only=True)
 df_zillow_timeseries_median = df_zillow_timeseries.median(numeric_only=True)
 df_zillow_timeseries_mean.index = pd.to_datetime(df_zillow_timeseries_mean.index)
 df_zillow_timeseries_median.index = pd.to_datetime(df_zillow_timeseries_median.index)
+st.write(df_zillow_timeseries_mean)
 print (df_zillow_timeseries_mean)
 
 #User input for cities
