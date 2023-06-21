@@ -116,4 +116,24 @@ def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
     plt.xlabel(xlabel,size=45)
     plt.ylabel(ylabel,size=45)
     plt.legend(fontsize="40",markerscale=10)
+
+def historical_timeseries_grid(df_mean,df_median):
+    plt.figure()
+    
+    states = ['CA','TX','FL','NY','PA','IL','OH','GA','NC']
+    
+    for chart in range(1,10):
+        df_state_mean = df_mean.copy()
+        df_state_mean = df_state_mean[df['State']==states[chart-1]]
+        df_state_median = df_median.copy()
+        df_state_median = df_state_median[df['State']==states[chart-1]]
+        plt.subplot(3,3,chart)
+        plt.plot(df_state,label='Mean',linewidth = '10',alpha=0.7)
+        plt.plot(df_state,label='Median',linewidth = '10',alpha=0.7)
+        plt.title(f'Mean and Median Historical Housing Prices',size=50)
+        plt.xticks(size=30)
+        plt.yticks(size=30)
+        plt.xlabel('Timeline',size=45)
+        plt.ylabel('Housing Price($)',size=45)
+        plt.legend(fontsize="40",markerscale=10)
     
