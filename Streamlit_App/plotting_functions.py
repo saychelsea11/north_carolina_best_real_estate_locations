@@ -118,7 +118,7 @@ def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
     plt.legend(fontsize="40",markerscale=10)
 
 def historical_timeseries_grid(df):    
-    fig3 = plt.figure(figsize=(36,25))
+    fig3 = plt.figure(figsize=(45,30))
     
     states = ['CA','TX','FL','NY','PA','IL','OH','GA','NC']
     
@@ -133,7 +133,7 @@ def historical_timeseries_grid(df):
         plt.subplot(3,3,chart)
         plt.plot(df_timeseries_mean,label='Mean',linewidth = '10',alpha=0.7)
         plt.plot(df_timeseries_median,label='Median',linewidth = '10',alpha=0.7)
-        plt.title(f'Mean and Median Historical Housing Prices',size=50)
+        plt.title(f'Historical Housing Prices',size=50)
         plt.xticks(size=30)
         plt.yticks(size=30)
         plt.xlabel('Timeline',size=45)
