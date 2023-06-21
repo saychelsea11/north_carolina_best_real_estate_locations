@@ -124,7 +124,7 @@ def historical_timeseries_grid(df):
     
     for chart in range(1,10):
         df_state = df.copy()
-        df_state = df_state[df_state['State'==states[chart-1]]]
+        df_state = df_state[df_state['State']==states[chart-1]]
         df_timeseries_mean = df_state.mean(numeric_only=True)
         df_timeseries_median = df_state.median(numeric_only=True)
         df_timeseries_mean.index = pd.to_datetime(df_timeseries_mean.index)
