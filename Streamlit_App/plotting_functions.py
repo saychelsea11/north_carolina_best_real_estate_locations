@@ -117,10 +117,15 @@ def uni_lineplot(df,xlabel,ylabel,title,chart_label=''):
     plt.ylabel(ylabel,size=45)
     plt.legend(fontsize="40",markerscale=10)
 
-def historical_timeseries_grid(df):    
+def historical_timeseries_grid(df,state_choice):    
     fig3 = plt.figure(constrained_layout=True,figsize=(45,30))
     
     states = ['CA','TX','FL','NY','PA','IL','OH','GA','NC']
+
+    if state_choice in states:
+        pass
+    else: 
+        states.pop(6)
     
     for chart in range(1,10):
         df_state = df.copy()
